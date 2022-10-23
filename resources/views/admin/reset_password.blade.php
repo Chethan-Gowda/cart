@@ -23,27 +23,34 @@
                     <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
                         <div class="card card-primary border-box">
                             <div class="card-header card-header-auth">
-                                <h4 class="text-center">Admin Panel Login</h4>
+                                <h4 class="text-center">Reset Password</h4>
                             </div>
                             <div class="card-body card-body-auth">
                                 @if(session()->get('success'))
                                 <div class="text-danger">{{ session()->get('success') }}</div>
                                 @endif
-                                <form method="POST" action="{{ route('admin_login_submit') }}">
+                                <form method="POST" action="{{ route('admin_reset_password_submit') }}">
                                     @csrf
-                                    <div class="form-group">
-                                        <input type="text" class="form-control @error('email') is-invalid @enderror" name="email"  value="{{ old('email') }} " placeholder="Email Address" autofocus>
-                                        @error('email')
-                                           <div class="text-danger">{{ $message }}</div>
-                                            
-                                        @enderror
-                                    </div>
+                                   
                                     <div class="form-group">
                                         <input type="password"  class="form-control @error('password') is-invalid @enderror" name="password"  placeholder="Password">
                                         @error('password')
                                         <div class="text-danger">{{ $message }}</div>
-                                         
-                                     @enderror
+                                        @enderror
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <input type="password"  class="form-control @error('confirmPassword') is-invalid @enderror" name="confirmPassword"  placeholder="Confirm Password">
+                                        @error('confirmPassword')
+                                        <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+
+
+                                        <input type="hidden" name="token" value="{{ $token }}" >
+                                        <input type="hidden" name="email" value="{{ $email }}" >
+
+
                                     </div>
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-primary btn-lg btn-block">
